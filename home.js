@@ -1,5 +1,13 @@
-(() => {
+const balEl = document.getElementById("bal");
+const bonusBtn = document.getElementById("bonusBtn");
 
-console.log("Mini Caz Loaded");
+function updateBalance(){
+  balEl.textContent = wallet.get();
+}
 
-})();
+bonusBtn.onclick = () => {
+  wallet.add(1000);
+  updateBalance();
+};
+
+updateBalance();
