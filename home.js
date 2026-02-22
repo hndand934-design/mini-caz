@@ -1,60 +1,46 @@
 (() => {
-  const balEl = document.getElementById("bal");
-  const bonusBtn = document.getElementById("bonusBtn");
+  // НИЧЕГО не делаем с кликами по ссылкам — пусть работают нативно.
 
   const soundBtn = document.getElementById("soundBtn");
-  const soundTxt = document.getElementById("soundTxt");
   const soundDot = document.getElementById("soundDot");
+  const soundTxt = document.getElementById("soundTxt");
+  const bonusBtn = document.getElementById("bonusBtn");
+  const balEl = document.getElementById("bal");
 
-  let soundOn = (localStorage.getItem("mini_caz_sound") ?? "1") === "1";
-  let audioCtx = null;
+  // wallet.js должен давать MiniWallet
+  const W = window.MiniWallet;
 
-  function updateBalance(){
-    balEl.textContent = Math.round(window.wallet.get());
+  function render() {
+    if (W && typeof W.getCoins === "function") balEl.textContent = String(W.getCoins());
   }
 
-  function beep(){
-    if (!soundOn) return;
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const t0 = audioCtx.currentTime;
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    o.connect(g); g.connect(audioCtx.destination);
-    o.type = "sine";
-    o.frequency.setValueAtTime(520, t0);
-    o.frequency.exponentialRampToValueAtTime(380, t0 + 0.08);
-    g.gain.setValueAtTime(0.0001, t0);
-    g.gain.exponentialRampToValueAtTime(0.08, t0 + 0.02);
-    g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.10);
-    o.start(t0);
-    o.stop(t0 + 0.12);
-  }
+  // звук (только UI)
+  let soundOn = localStorage.getItem("mini_sound_on");
+  soundOn = (soundOn === null) ? true : (soundOn === "1");
 
-  function updateSoundUI(){
+  function renderSound() {
     soundTxt.textContent = soundOn ? "Звук on" : "Звук off";
-    soundDot.style.opacity = soundOn ? "1" : ".35";
-    soundDot.style.boxShadow = soundOn ? "0 0 0 3px rgba(38,212,123,.14)" : "none";
+    soundDot.style.background = soundOn ? "#26d47b" : "#ff5a6a";
+    soundDot.style.boxShadow = soundOn
+      ? "0 0 0 3px rgba(38,212,123,.14)"
+      : "0 0 0 3px rgba(255,90,106,.14)";
   }
 
-  bonusBtn.addEventListener("click", () => {
-    window.wallet.add(1000);
-    updateBalance();
-    beep();
-  });
-
-  soundBtn.addEventListener("click", async () => {
+  soundBtn?.addEventListener("click", () => {
     soundOn = !soundOn;
-    localStorage.setItem("mini_caz_sound", soundOn ? "1" : "0");
-    updateSoundUI();
-    beep();
-    if (soundOn && audioCtx && audioCtx.state === "suspended") {
-      try { await audioCtx.resume(); } catch {}
-    }
+    localStorage.setItem("mini_sound_on", soundOn ? "1" : "0");
+    renderSound();
   });
 
-  updateSoundUI();
-  updateBalance();
+  bonusBtn?.addEventListener("click", () => {
+    if (!W || typeof W.addCoins !== "function") return;
+    W.addCoins(1000);
+    render();
+  });
 
-  // keep balance updated if some mode changes it and you return back
-  window.addEventListener("focus", updateBalance);
+  // обновлять баланс если другие режимы меняли кошелёк
+  window.addEventListener("focus", render);
+
+  renderSound();
+  render();
 })();
