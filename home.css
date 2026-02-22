@@ -92,3 +92,46 @@
   opacity:.8;
 }
 .muted{ color: var(--muted); font-size:12px; }
+
+/* ===== FIX: iOS tap / overlay safety ===== */
+
+/* фон и любые декоративные слои не должны ловить клики */
+.bgFx,
+.bg,
+.stars,
+.wrap::before,
+.wrap::after,
+.grid::before,
+.grid::after,
+.card::before,
+.card::after,
+.glass::before,
+.glass::after {
+  pointer-events: none !important;
+}
+
+/* контент точно поверх */
+.wrap {
+  position: relative;
+  z-index: 2;
+}
+
+/* карточки и сетка обязаны принимать клики */
+.grid {
+  position: relative;
+  z-index: 3;
+  pointer-events: auto !important;
+}
+
+.grid a,
+.card {
+  position: relative;
+  z-index: 4;
+  pointer-events: auto !important;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* если где-то случайно отключили */
+.card * {
+  pointer-events: none; /* чтобы клик всегда попадал в <a> */
+}
