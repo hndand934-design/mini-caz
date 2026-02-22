@@ -5,181 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Mini Caz</title>
 
-  <style>
-    :root{
-      --bg1:#070818;
-      --bg2:#0a1030;
-      --glass: rgba(255,255,255,.06);
-      --stroke: rgba(255,255,255,.10);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.62);
-      --red:#ff3b66;
-      --violet:#7d4dff;
-      --blue:#3a7bff;
-      --good:#26d47b;
-      --bad:#ff5a6a;
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
-      --r: 18px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:
-        radial-gradient(900px 500px at 20% 10%, rgba(125,77,255,.25), transparent 60%),
-        radial-gradient(900px 500px at 80% 20%, rgba(58,123,255,.22), transparent 60%),
-        radial-gradient(900px 500px at 50% 90%, rgba(255,59,102,.18), transparent 60%),
-        linear-gradient(180deg, var(--bg2), var(--bg1));
-      overflow-x:hidden;
-    }
-    .wrap{
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 18px 14px 26px;
-    }
-    .glass{
-      background: var(--glass);
-      border: 1px solid var(--stroke);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 14px 14px;
-    }
-    .brand__title{
-      font-weight: 900;
-      letter-spacing: .08em;
-      font-size: 20px;
-    }
-    .brand__sub{
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 2px;
-    }
-    .top__right{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap: wrap;
-      justify-content:flex-end;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.05);
-      color: var(--text);
-      font-weight: 800;
-      font-size: 13px;
-      user-select:none;
-      cursor:pointer;
-    }
-    .pill[disabled]{opacity:.55; cursor:not-allowed}
-    .dot{
-      width:10px;height:10px;border-radius:99px;
-      background: var(--good);
-      box-shadow: 0 0 0 3px rgba(38,212,123,.14);
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(58,123,255,.55);
-      background: linear-gradient(180deg, rgba(58,123,255,.95), rgba(58,123,255,.62));
-      color:white;
-      font-weight: 900;
-      cursor:pointer;
-      box-shadow: 0 14px 34px rgba(58,123,255,.18);
-    }
-    .btn:active{transform:scale(.99)}
-    .grid{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap: 12px;
-    }
-    @media (max-width: 980px){ .grid{grid-template-columns: repeat(2, minmax(0,1fr));} }
-    @media (max-width: 420px){ .grid{grid-template-columns: 1fr;} }
-
-    .card{
-      text-decoration:none;
-      color:inherit;
-      padding: 14px 14px 12px;
-      position:relative;
-      overflow:hidden;
-      transition: transform .12s ease, border-color .12s ease;
-      min-height: 110px;
-    }
-    .card:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.18); }
-    .card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(500px 180px at 20% 0%, rgba(125,77,255,.18), transparent 60%),
-        radial-gradient(500px 180px at 80% 20%, rgba(58,123,255,.18), transparent 60%),
-        radial-gradient(500px 220px at 50% 120%, rgba(255,59,102,.14), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .card > *{ position:relative; z-index:1; }
-    .card__top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom: 8px;
-    }
-    .card__icon{
-      width:44px;height:44px;border-radius: 14px;
-      display:flex;align-items:center;justify-content:center;
-      font-size: 22px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-    }
-    .tag{
-      font-size: 12px;
-      font-weight: 900;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      color: rgba(255,255,255,.78);
-      background: rgba(0,0,0,.18);
-      white-space: nowrap;
-    }
-    .card__name{
-      font-weight: 950;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-    .card__desc{
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.25;
-    }
-    .foot{
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 12px;
-      text-align:center;
-    }
-  </style>
+  <link rel="stylesheet" href="./shared/theme.css" />
+  <link rel="stylesheet" href="./home.css" />
 </head>
 
 <body>
+  <!-- фон отдельно и НЕ ловит клики -->
+  <div class="bgFx" aria-hidden="true"></div>
+
   <div class="wrap">
     <header class="top glass">
       <div class="brand">
@@ -188,210 +21,75 @@
       </div>
 
       <div class="top__right">
-        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+        <button id="soundBtn" class="pill" type="button">
           <span class="dot" id="soundDot"></span>
           <span id="soundTxt">Звук on</span>
         </button>
 
-        <button id="bonusBtn" class="btn" type="button">+1000 🪙</button>
+        <button id="bonusBtn" class="btn btn--blue" type="button">+1000 ₽</button>
 
-        <div class="pill" style="cursor:default">
-          Баланс: <b id="bal">0</b> 🪙
+        <div class="pill">
+          Баланс: <b id="bal">0</b> ₽
         </div>
       </div>
     </header>
 
-    <main class="grid">
-      <a class="card glass" href="./rps/">
-        <div class="card__top">
-          <div class="card__icon">✊🏻</div>
-          <div class="tag">RPS</div>
-        </div>
-        <div class="card__name">Камень • Ножницы • Бумага</div>
-        <div class="card__desc">Серия побед • лестница X • cashout</div>
+    <main class="grid" id="gamesGrid">
+      <a class="card glass" href="./rps/" data-go="./rps/">
+        <div class="card__icon">✊</div>
+        <div class="card__name">RPS</div>
+        <div class="card__desc">Камень • Ножницы • Бумага</div>
       </a>
 
-      <a class="card glass" href="./penalty/">
-        <div class="card__top">
-          <div class="card__icon">⚽</div>
-          <div class="tag">Penalty</div>
-        </div>
-        <div class="card__name">Пенальти</div>
-        <div class="card__desc">Умный вратарь • 2 сложности • X лестница</div>
+      <a class="card glass" href="./penalty/" data-go="./penalty/">
+        <div class="card__icon">⚽</div>
+        <div class="card__name">Penalty</div>
+        <div class="card__desc">Пенальти • серия • X лестница</div>
       </a>
 
-      <a class="card glass" href="./mines/">
-        <div class="card__top">
-          <div class="card__icon">💣</div>
-          <div class="tag">Mines</div>
-        </div>
-        <div class="card__name">Mines 5×5</div>
-        <div class="card__desc">Выбор мин • лестница заранее • cashout</div>
+      <a class="card glass" href="./mines/" data-go="./mines/">
+        <div class="card__icon">💣</div>
+        <div class="card__name">Mines</div>
+        <div class="card__desc">5×5 • кэшаут • лестница</div>
       </a>
 
-      <a class="card glass" href="./wheel/">
-        <div class="card__top">
-          <div class="card__icon">🎡</div>
-          <div class="tag">Wheel</div>
-        </div>
-        <div class="card__name">Колесо</div>
-        <div class="card__desc">Выбор множителя • честный RNG • ставка</div>
+      <a class="card glass" href="./wheel/" data-go="./wheel/">
+        <div class="card__icon">🎡</div>
+        <div class="card__name">Wheel</div>
+        <div class="card__desc">Множители • честный RNG</div>
       </a>
 
-      <a class="card glass" href="./dice/">
-        <div class="card__top">
-          <div class="card__icon">🎲</div>
-          <div class="tag">Dice</div>
-        </div>
+      <a class="card glass" href="./dice/" data-go="./dice/">
+        <div class="card__icon">🎲</div>
         <div class="card__name">Dice</div>
-        <div class="card__desc">3D кубик • меньше/больше • house edge</div>
+        <div class="card__desc">Меньше/Больше • edge</div>
       </a>
 
-      <a class="card glass" href="./coinflip/">
-        <div class="card__top">
-          <div class="card__icon">🪙</div>
-          <div class="tag">Coin Flip</div>
-        </div>
-        <div class="card__name">Монетка</div>
-        <div class="card__desc">3D • орёл/решка • мгновенный результат</div>
+      <a class="card glass" href="./coinflip/" data-go="./coinflip/">
+        <div class="card__icon">🪙</div>
+        <div class="card__name">Coin Flip</div>
+        <div class="card__desc">Орёл/Решка • 3D монета</div>
       </a>
 
-      <a class="card glass" href="./crash/">
-        <div class="card__top">
-          <div class="card__icon">🚀</div>
-          <div class="tag">Crash</div>
-        </div>
-        <div class="card__name">Rocket Crash</div>
-        <div class="card__desc">График 60fps • cashout в полёте</div>
+      <a class="card glass" href="./crash/" data-go="./crash/">
+        <div class="card__icon">🚀</div>
+        <div class="card__name">Crash</div>
+        <div class="card__desc">Ракета • кэшаут • график</div>
       </a>
 
-      <a class="card glass" href="./tower/">
-        <div class="card__top">
-          <div class="card__icon">🐉</div>
-          <div class="tag">Tower</div>
-        </div>
-        <div class="card__name">Dragon Tower</div>
-        <div class="card__desc">Яйца/черепа • 2 режима • cashout</div>
+      <a class="card glass" href="./tower/" data-go="./tower/">
+        <div class="card__icon">🐉</div>
+        <div class="card__name">Tower</div>
+        <div class="card__desc">Башня • яйца/черепа</div>
       </a>
     </main>
 
     <footer class="foot">
-      v1 • GitHub Pages • Локальный RNG • Единый кошелёк
+      <div class="muted">v1 • GitHub Pages • Локально RNG</div>
     </footer>
   </div>
 
-  <script>
-    // ===== единый кошелёк (и миграция со старых ключей) =====
-    const SHARED_KEY = "mini_wallet_shared_v1";
-    const OLD_KEYS = [
-      "mini_wallet_rps_v1",
-      "mini_wallet_coinflip_v4",
-      "mini_wallet_crash_v1",
-      "mini_wallet_dice_v1",
-      "mini_wallet_mines_v3",
-      "mini_wallet_penalty_v1",
-      "mini_wallet_dragontower_v1",
-      "mini_wallet_wheel_v1"
-    ];
-
-    function loadCoinsFromKey(key){
-      try{
-        const raw = localStorage.getItem(key);
-        if (!raw) return null;
-
-        // форматы: {coins:number} или просто number/string
-        const asNum = Number(raw);
-        if (Number.isFinite(asNum)) return Math.floor(asNum);
-
-        const obj = JSON.parse(raw);
-        if (obj && typeof obj.coins === "number") return Math.floor(obj.coins);
-      }catch{}
-      return null;
-    }
-
-    function saveSharedCoins(coins){
-      const c = Math.max(0, Math.floor(coins));
-      localStorage.setItem(SHARED_KEY, JSON.stringify({ coins: c }));
-      return c;
-    }
-
-    function loadSharedCoins(){
-      const c = loadCoinsFromKey(SHARED_KEY);
-      if (typeof c === "number") return c;
-      return null;
-    }
-
-    function migrateIfNeeded(){
-      let shared = loadSharedCoins();
-      if (typeof shared === "number") return shared;
-
-      // если общего ещё нет — берём максимальный из старых, чтобы “не потерять” баланс
-      let best = 1000;
-      for (const k of OLD_KEYS){
-        const v = loadCoinsFromKey(k);
-        if (typeof v === "number" && v > best) best = v;
-      }
-      return saveSharedCoins(best);
-    }
-
-    let coins = migrateIfNeeded();
-
-    // ===== UI =====
-    const balEl = document.getElementById("bal");
-    const bonusBtn = document.getElementById("bonusBtn");
-    const soundBtn = document.getElementById("soundBtn");
-    const soundTxt = document.getElementById("soundTxt");
-    const soundDot = document.getElementById("soundDot");
-
-    function render(){
-      balEl.textContent = String(coins);
-    }
-    render();
-
-    // звук
-    let soundOn = (localStorage.getItem("mini_caz_sound") ?? "1") !== "0";
-    function renderSound(){
-      soundTxt.textContent = soundOn ? "Звук on" : "Звук off";
-      soundDot.style.background = soundOn ? "#26d47b" : "#ff5a6a";
-      soundDot.style.boxShadow = soundOn
-        ? "0 0 0 3px rgba(38,212,123,.14)"
-        : "0 0 0 3px rgba(255,90,106,.14)";
-    }
-    function beep(freq=520, ms=55, vol=0.03){
-      if(!soundOn) return;
-      try{
-        const AC = window.AudioContext || window.webkitAudioContext;
-        const ctx = new AC();
-        const o = ctx.createOscillator();
-        const g = ctx.createGain();
-        o.type="sine"; o.frequency.value=freq; g.gain.value=vol;
-        o.connect(g); g.connect(ctx.destination);
-        o.start();
-        setTimeout(()=>{ o.stop(); ctx.close(); }, ms);
-      }catch{}
-    }
-    renderSound();
-
-    soundBtn.addEventListener("click", () => {
-      soundOn = !soundOn;
-      localStorage.setItem("mini_caz_sound", soundOn ? "1" : "0");
-      renderSound();
-      beep(soundOn ? 640 : 240, 60, 0.03);
-    });
-
-    // бонус
-    bonusBtn.addEventListener("click", () => {
-      coins = saveSharedCoins(coins + 1000);
-      render();
-      beep(760, 70, 0.03);
-    });
-
-    // обновляться если баланс поменяли в другой вкладке/режиме
-    window.addEventListener("storage", (e) => {
-      if (e.key !== SHARED_KEY) return;
-      const v = loadSharedCoins();
-      if (typeof v === "number") { coins = v; render(); }
-    });
-  </script>
+  <script src="./shared/wallet.js"></script>
+  <script src="./home.js"></script>
 </body>
 </html>
