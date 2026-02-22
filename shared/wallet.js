@@ -1,16 +1,19 @@
-(() => {
-  const KEY = "mini_wallet_global";
+const WALLET_KEY="mini_caz_wallet";
 
-  function read() {
-    const v = localStorage.getItem(KEY);
-    return v ? Number(v) : 1000;
-  }
-  function write(v) {
-    localStorage.setItem(KEY, String(v));
-  }
-  function add(n) {
-    write(read() + n);
-  }
+const wallet={
+get(){
+return Number(localStorage.getItem(WALLET_KEY)||1000);
+},
 
-  window.Wallet = { read, write, add };
-})();
+set(v){
+localStorage.setItem(WALLET_KEY,v);
+},
+
+add(v){
+this.set(this.get()+v);
+},
+
+take(v){
+this.set(this.get()-v);
+}
+};
