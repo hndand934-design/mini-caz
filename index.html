@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Mini Caz</title>
 
 <link rel="stylesheet" href="home.css">
@@ -12,25 +13,66 @@
 
 <div class="app">
 
-<h1 class="logo">MINI CAZ</h1>
+<header class="topbar">
+  <div class="logo">🎰 MINI CAZ</div>
 
-<div class="games">
+  <div class="right">
+      <div class="balance">
+        💰 <span id="bal">0</span> ₽
+      </div>
 
-  <a class="gameBtn" href="./rps/">RPS</a>
-  <a class="gameBtn" href="./penalty/">Penalty</a>
-  <a class="gameBtn" href="./mines/">Mines</a>
-  <a class="gameBtn" href="./wheel/">Wheel</a>
+      <button id="bonusBtn">+1000</button>
+  </div>
+</header>
 
-  <a class="gameBtn" href="./dice/">Dice</a>
-  <a class="gameBtn" href="./coinflip/">Coin Flip</a>
-  <a class="gameBtn" href="./crash/">Crash</a>
-  <a class="gameBtn" href="./tower/">Tower</a>
+
+<section class="games">
+
+<a class="game" href="./rps/">
+  <div class="icon">✊</div>
+  <div>RPS</div>
+</a>
+
+<a class="game" href="./penalty/">
+  <div class="icon">⚽</div>
+  <div>Penalty</div>
+</a>
+
+<a class="game" href="./mines/">
+  <div class="icon">💣</div>
+  <div>Mines</div>
+</a>
+
+<a class="game" href="./wheel/">
+  <div class="icon">🎡</div>
+  <div>Wheel</div>
+</a>
+
+<a class="game" href="./dice/">
+  <div class="icon">🎲</div>
+  <div>Dice</div>
+</a>
+
+<a class="game" href="./coinflip/">
+  <div class="icon">🪙</div>
+  <div>Coin Flip</div>
+</a>
+
+<a class="game" href="./crash/">
+  <div class="icon">🚀</div>
+  <div>Crash</div>
+</a>
+
+<a class="game" href="./tower/">
+  <div class="icon">🐉</div>
+  <div>Tower</div>
+</a>
+
+</section>
 
 </div>
 
-</div>
-
-<script src="shared/wallet.js"></script>
+<script src="./shared/wallet.js"></script>
 <script src="home.js"></script>
 
 </body>
